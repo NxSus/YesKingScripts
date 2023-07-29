@@ -4,11 +4,7 @@ local Win = Mana:Window("Anime Fighting Simulator Z") -- Creates the Window AKA 
 
 local MainStuff = Mana:SName("MainStuff") -- Creates a little information mark in the top left looks cool ngl try it
 
-local Autofarm = Win:Tab("AutoFarm")-- This Creates a Tab on the left Side
-
-Autofarm:Button("Antiafk", function() -- This is A Button
-loadstring(game:HttpGet("https://raw.githubusercontent.com/KazeOnTop/Rice-Anti-Afk/main/Wind", true))()
-end)
+local Autofarm = Win:Tab("AutoFarm")-- This Creates a Tab on the left
 
 Autofarm:Toggle("Speed", false, function(t) -- This is A Toggle
 speed = t
