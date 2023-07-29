@@ -1,0 +1,85 @@
+local Mana = loadstring(game:HttpGet("https://pastebin.com/raw/inP2PXxe"))()
+
+local Win = Mana:Window("Anime Fighting Simulator Z") -- Creates the Window AKA Adds the ScreenGui to CoreGui lol
+
+local MainStuff = Mana:SName("MainStuff") -- Creates a little information mark in the top left looks cool ngl try it
+
+local Autofarm = Win:Tab("AutoFarm") -- This Creates a Tab on the left Side
+
+Autofarm:Toggle("Speed", false, function(t) -- This is A Toggle
+speed = t
+   while speed do task.wait()
+-- Script made by Yes King
+
+local args = {
+    [1] = "TrainStat",
+    [2] = "Speed"
+}
+
+game:GetService("ReplicatedStorage").Events:FindFirstChild("Stats/RemoteFunction"):InvokeServer(unpack(args))
+end      
+end)
+
+Autofarm:Toggle("Durability", false, function(d)
+Dura = d
+while Dura do
+wait()
+
+local args = {
+    [1] = "TrainStat",
+    [2] = "Durability"
+}
+
+game:GetService("ReplicatedStorage").Events:FindFirstChild("Stats/RemoteFunction"):InvokeServer(unpack(args))
+end
+end)
+
+Autofarm:Toggle("Strength", false, function(St)
+Strength = St
+while Strength do
+wait()
+
+local args = {
+    [1] = "TrainStat",
+    [2] = "Strength"
+}
+
+game:GetService("ReplicatedStorage").Events:FindFirstChild("Stats/RemoteFunction"):InvokeServer(unpack(args))
+end
+end)
+
+Autofarm:Toggle("Chakra", false, function(ch)
+Cha = ch
+while Cha do
+wait()
+
+local args = {
+    [1] = "TrainStat",
+    [2] = "Chakra"
+}
+
+game:GetService("ReplicatedStorage").Events:FindFirstChild("Stats/RemoteFunction"):InvokeServer(unpack(args))
+end
+end)
+
+Autofarm:Toggle("Sword", false, function(d)
+Swor = Sw
+while Swor do
+wait()
+
+local args = {
+    [1] = "TrainStat",
+    [2] = "Sword"
+}
+
+game:GetService("ReplicatedStorage").Events:FindFirstChild("Stats/RemoteFunction"):InvokeServer(unpack(args))
+end
+end)
+
+
+Autofarm:Label("Made By Yes King") -- This is just for information or Text ;
+
+Autofarm:line() -- This Creates a line aka some space for a new section or something like that :
+
+
+print("Enjoy!")
