@@ -62,7 +62,7 @@ game:GetService("ReplicatedStorage").Events:FindFirstChild("Stats/RemoteFunction
 end
 end)
 
-Autofarm:Toggle("Sword", false, function(d)
+Autofarm:Toggle("Sword", false, function(Sw)
 Swor = Sw
 while Swor do
 wait()
