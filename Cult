@@ -2,14 +2,15 @@ local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/shl
 local Window = OrionLib:MakeWindow({Name = "CultivationGame", HidePremium = false, SaveConfig = true, ConfigFolder = "Config"})
 
 --Values
-_G.autoCult = True
+_G.autoCult = true
 
 
 --Functions
 
 function autoCult()
- while _G.autoCult == True do 
+ while _G.autoCult == true do 
    game:GetService("ReplicatedStorage").UpdateCultivation:FireServer()
+   wait(.0000000000000000000000000001)
   end
  end
 
