@@ -67,6 +67,16 @@ Tab:AddButton({
   	end    
 })
 
+Tab:AddButton({
+	Name = "AutoFight(Press Once!!!)",
+	Callback = function()
+         while true do
+          wait() --you need this, otherwise roblox will crash
+          game:GetService("ReplicatedStorage").GenerateFight:FireServer()
+         end
+        end    
+})
+
 
 --Toggles
 Tab:AddToggle({
