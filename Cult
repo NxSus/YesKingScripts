@@ -8,11 +8,10 @@ _G.autoCult = True
 --Functions
 
 function autoCult()
-  while _G.autoCult == True do 
-   wait()
+ while _G.autoCult == True do 
    game:GetService("ReplicatedStorage").UpdateCultivation:FireServer()
+  end
  end
-end
 
 --Tabs
 local Tab = Window:MakeTab({
@@ -29,8 +28,8 @@ Tab:AddToggle({
 	Name = "Auto Cultivate Times 10",
 	Default = false,
 	Callback = function(Value)
-		_G.autoCult = Value
-                autoCult()
+	  _G.autoCult = Value
+          autoCult()
 	end    
 })
 
