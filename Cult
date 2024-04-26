@@ -28,6 +28,7 @@ local Tab = Window:MakeTab({
 
 --Toggles
 
+
 Tab:AddToggle({
 	Name = "Auto Cultivate Times 10",
 	Default = false,
