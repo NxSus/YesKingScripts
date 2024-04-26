@@ -18,19 +18,13 @@ end
 --Tabs
 
 local Tab = Window:MakeTab({
-	Name = "Main",
+	Name = "Mabin",
 	Icon = "rbxassetid://4483345998",
 	PremiumOnly = false
 })
 
 --Buttons
 
-Tab:AddButton({
-	Name = "AntiAfk",
-	Callback = function()
-      		loadstring(game:HttpGet("https://raw.githubusercontent.com/NxSus/YesKingScripts/main/Antiafk"))()
-  	end    
-})
 
 --Toggles
 
