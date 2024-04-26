@@ -14,6 +14,17 @@ function autoCult()
   end
  end
 
+function autoPill()
+ while _G.autoPill == true do 
+   local args = {
+    [1] = 1
+   }
+
+   game:GetService("ReplicatedStorage"):WaitForChild("CreatePill"):FireServer(unpack(args))
+   wait(.000000000000000000000000001)
+  end
+ end
+
 --Tabs
 local Tab = Window:MakeTab({
 	Name = "Mabin",
@@ -32,6 +43,30 @@ Tab:AddButton({
   	end    
 })
 
+Tab:AddButton({
+	Name = "Breakthrough(Press Once)",
+	Callback = function()
+         while true do
+          wait() --you need this, otherwise roblox will crash
+          game:GetService("ReplicatedStorage").RequestBreakthrough:FireServer()
+         end
+  	end    
+})
+
+Tab:AddButton({
+	Name = "Beast AutoXp(Press 5 Times)",
+	Callback = function()
+         while true do
+          wait() --you need this, otherwise roblox will crash
+          local args = {
+          [1] = 1
+          }
+
+          game:GetService("ReplicatedStorage"):WaitForChild("UpdateBeastCultivation"):FireServer(unpack(args))
+         end
+  	end    
+})
+
 
 --Toggles
 Tab:AddToggle({
@@ -40,6 +75,15 @@ Tab:AddToggle({
 	Callback = function(Value)
 	  _G.autoCult = Value
           autoCult()
+	end    
+})
+
+Tab:AddToggle({
+	Name = "Auto Pill",
+	Default = false,
+	Callback = function(Value)
+	  _G.autoPill = Value
+          autoPill()
 	end    
 })
 
