@@ -52,7 +52,7 @@ Time = <number> - The duration of the notfication.
 
 Tab:AddButton({
 	Name = "Sweartogod",
-	Callback = function()
+	Callback = player.Character.Humanoid.Walkspeed = 200
       		
   	end    
 })
