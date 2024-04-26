@@ -2,7 +2,6 @@ local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/shl
 local Window = OrionLib:MakeWindow({Name = "CultivationGame", HidePremium = false, SaveConfig = true, ConfigFolder = "Config"})
 
 --Values
-
 _G.autoCult = True
 
 
@@ -16,7 +15,6 @@ function autoCult()
 end
 
 --Tabs
-
 local Tab = Window:MakeTab({
 	Name = "Mabin",
 	Icon = "rbxassetid://4483345998",
@@ -27,8 +25,6 @@ local Tab = Window:MakeTab({
 
 
 --Toggles
-
-
 Tab:AddToggle({
 	Name = "Auto Cultivate Times 10",
 	Default = false,
