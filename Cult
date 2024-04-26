@@ -9,10 +9,9 @@ _G.autoCult = True
 
 function autoCult()
   while _G.autoCult == True do 
+  wait()
   game:GetService("ReplicatedStorage").UpdateCultivation:FireServer()
-  wait(0.0000000000000000000000000000000001)
  end
-end
 
 --Tabs
 local Tab = Window:MakeTab({
