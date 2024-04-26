@@ -22,11 +22,20 @@ local Tab = Window:MakeTab({
 })
 
 --Buttons
+Tab:AddButton({
+	Name = "Cultivate Multiplier",
+	Callback = function()
+         while true do
+          wait() --you need this, otherwise roblox will crash
+          game:GetService("ReplicatedStorage").UpdateCultivation:FireServer()
+         end
+  	end    
+})
 
 
 --Toggles
 Tab:AddToggle({
-	Name = "Auto Cultivate Times 10",
+	Name = "Auto Cultivate",
 	Default = false,
 	Callback = function(Value)
 	  _G.autoCult = Value
