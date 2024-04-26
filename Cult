@@ -1,12 +1,27 @@
 local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/shlexware/Orion/main/source')))()
 local Window = OrionLib:MakeWindow({Name = "CultivationGame", HidePremium = false, SaveConfig = true, ConfigFolder = "Config"})
 
+--Values
+_G.autoCult = True
+
+
+--Functions
+
+function autoCult()
+  while _G.autoCult == True do 
+  game:GetService("ReplicatedStorage").UpdateCultivation:FireServer()
+  wait(0.0000000000000000000000000000000001)
+ end
+end
+
+--Tabs
 local Tab = Window:MakeTab({
 	Name = "Main",
 	Icon = "rbxassetid://4483345998",
 	PremiumOnly = false
 })
 
+--Buttons
 Tab:AddButton({
 	Name = "AntiAfk",
 	Callback = function()
@@ -14,12 +29,13 @@ Tab:AddButton({
   	end    
 })
 
-
+--Toggles
 Tab:AddToggle({
 	Name = "Auto Cultivate Times 10",
 	Default = false,
 	Callback = function(Value)
-		print(Value)
+		_G.autoCult == Value
+                autoCult()
 	end    
 })
 
