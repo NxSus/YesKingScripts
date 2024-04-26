@@ -12,6 +12,7 @@ function autoCult()
   wait()
   game:GetService("ReplicatedStorage").UpdateCultivation:FireServer()
  end
+end
 
 --Tabs
 local Tab = Window:MakeTab({
