@@ -29,7 +29,7 @@ Tab:AddToggle({
 	Name = "Auto Cultivate Times 10",
 	Default = false,
 	Callback = function(Value)
-		_G.autoCult == Value
+		_G.autoCult = Value
                 autoCult()
 	end    
 })
