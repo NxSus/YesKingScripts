@@ -25,6 +25,17 @@ function autoPill()
   end
  end
 
+function autoPillTw()
+ while _G.autoPillTw == true do 
+   local args = {
+    [1] = 2
+   }
+
+   game:GetService("ReplicatedStorage"):WaitForChild("CreatePill"):FireServer(unpack(args))
+   wait(.000000000000000000000000001)
+  end
+ end
+
 --Tabs
 local Tab = Window:MakeTab({
 	Name = "Mabin",
@@ -97,6 +108,14 @@ Tab:AddToggle({
 	end    
 })
 
+Tab:AddToggle({
+	Name = "Auto Pill 2",
+	Default = false,
+	Callback = function(Value)
+	  _G.autoPillTw = Value
+          autoPillTw()
+	end    
+})
 
 
 
