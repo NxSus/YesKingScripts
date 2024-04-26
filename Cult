@@ -53,7 +53,7 @@ Time = <number> - The duration of the notfication.
 Tab:AddButton({
 	Name = "Sweartogod",
 	Callback = function()
-      	   loadstring(game:HttpGet("https://raw.githubusercontent.com/NxSus/YesKingScripts/main/Antiafk"))()
+      	   loadstring(game:HttpGet("https://raw.githubusercontent.com/NxSus/YesKingScripts/main/AnimeFight"))()
   	end    
 })
 
