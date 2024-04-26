@@ -15,7 +15,13 @@ Tab:AddButton({
 })
 
 
-
+Tab:AddToggle({
+	Name = "Auto Cultivate Times 10",
+	Default = false,
+	Callback = function(Value)
+		print(Value)
+	end    
+})
 
 
 
