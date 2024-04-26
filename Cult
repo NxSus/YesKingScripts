@@ -51,15 +51,13 @@ Time = <number> - The duration of the notfication.
 ]]
 
 Tab:AddButton({
-	Name = "Button!",
-	Callback = function(local vu = game:GetService("VirtualUser")
+	Name = "Sweartogod",
+	Callback = function()
+      		local vu = game:GetService("VirtualUser")
 game:GetService("Players").LocalPlayer.Idled:connect(function()
 vu:Button2Down(Vector2.new(0,0),workspace.CurrentCamera.CFrame)
 wait(1)
 vu:Button2Up(Vector2.new(0,0),workspace.CurrentCamera.CFrame)
-end))
-             print("Test")
-      		print("button pressed")
   	end    
 })
 
@@ -67,3 +65,4 @@ end))
 Name = <string> - The name of the button.
 Callback = <function> - The function of the button.
 ]]
+
