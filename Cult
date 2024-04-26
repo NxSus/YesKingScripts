@@ -1,5 +1,4 @@
 local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/shlexware/Orion/main/source')))()
-
 local Window = OrionLib:MakeWindow({Name = "CultivationGame", HidePremium = false, SaveConfig = true, ConfigFolder = "Config"})
 
 local Tab = Window:MakeTab({
@@ -14,6 +13,8 @@ Tab:AddButton({
       		loadstring(game:HttpGet("https://raw.githubusercontent.com/NxSus/YesKingScripts/main/Antiafk"))()
   	end    
 })
+
+
 
 
 
