@@ -36,6 +36,13 @@ function autoPillTw()
   end
  end
 
+function autoFight()
+ while _G.autoFight == true do
+   game:GetService("ReplicatedStorage").GenerateFight:FireServer()
+   wait(.001)
+  end
+ end
+
 --Tabs
 local Tab = Window:MakeTab({
 	Name = "Mabin",
@@ -78,15 +85,6 @@ Tab:AddButton({
   	end    
 })
 
-Tab:AddButton({
-	Name = "AutoFight(Press Once!!!)",
-	Callback = function()
-         while true do
-          wait() --you need this, otherwise roblox will crash
-          game:GetService("ReplicatedStorage").GenerateFight:FireServer()
-         end
-        end    
-})
 
 
 --Toggles
@@ -96,6 +94,15 @@ Tab:AddToggle({
 	Callback = function(Value)
 	  _G.autoCult = Value
           autoCult()
+	end    
+})
+
+Tab:AddToggle({
+	Name = "Auto Fight",
+	Default = false,
+	Callback = function(Value)
+	  _G.autoFight = Value
+          autoFight()
 	end    
 })
 
