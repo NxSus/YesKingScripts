@@ -17,10 +17,10 @@ function autoCult()
 function autoPill()
  while _G.autoPill == true do 
    local args = {
-    [1] = 1
-   }
+    [1] = "Fire"
+}
 
-   game:GetService("ReplicatedStorage"):WaitForChild("CreatePill"):FireServer(unpack(args))
+game:GetService("ReplicatedStorage"):WaitForChild("ComprehendDao"):FireServer(unpack(args))
    wait(.000000000000000000000000001)
   end
  end
@@ -107,7 +107,7 @@ Tab:AddToggle({
 })
 
 Tab:AddToggle({
-	Name = "Auto Pill",
+	Name = "ComprehendFirw",
 	Default = false,
 	Callback = function(Value)
 	  _G.autoPill = Value
