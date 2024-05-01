@@ -9,8 +9,12 @@ _G.autoCult = true
 
 function autoCult()
  while _G.autoCult == true do 
-   game:GetService("ReplicatedStorage").UpdateCultivation:FireServer()
-   wait(.0000000000000000000000000001)
+   local args = {
+    [1] = "Air"
+}
+
+game:GetService("ReplicatedStorage"):WaitForChild("ComprehendDao"):FireServer(unpack(args))
+   wait(.000000000000000000000000001)
   end
  end
 
@@ -28,10 +32,10 @@ game:GetService("ReplicatedStorage"):WaitForChild("ComprehendDao"):FireServer(un
 function autoPillTw()
  while _G.autoPillTw == true do 
    local args = {
-    [1] = 2
-   }
+    [1] = "Water"
+}
 
-   game:GetService("ReplicatedStorage"):WaitForChild("CreatePill"):FireServer(unpack(args))
+game:GetService("ReplicatedStorage"):WaitForChild("ComprehendDao"):FireServer(unpack(args))
    wait(.000000000000000000000000001)
   end
  end
@@ -40,6 +44,17 @@ function autoFight()
  while _G.autoFight == true do
    game:GetService("ReplicatedStorage").GenerateFight:FireServer()
    wait(.001)
+  end
+ end
+
+function Earth()
+ while _G.Earth == true do 
+   local args = {
+    [1] = "Earth"
+}
+
+game:GetService("ReplicatedStorage"):WaitForChild("ComprehendDao"):FireServer(unpack(args))
+   wait(.000000000000000000000000001)
   end
  end
 
@@ -61,15 +76,7 @@ Tab:AddButton({
   	end    
 })
 
-Tab:AddButton({
-	Name = "Breakthrough(Press Once)",
-	Callback = function()
-         while true do
-          wait() --you need this, otherwise roblox will crash
-          game:GetService("ReplicatedStorage").RequestBreakthrough:FireServer()
-         end
-  	end    
-})
+
 
 Tab:AddButton({
 	Name = "Beast AutoXp(Press 5 Times)",
@@ -89,7 +96,7 @@ Tab:AddButton({
 
 --Toggles
 Tab:AddToggle({
-	Name = "Auto Cultivate",
+	Name = "ComprehendAir",
 	Default = false,
 	Callback = function(Value)
 	  _G.autoCult = Value
@@ -107,7 +114,7 @@ Tab:AddToggle({
 })
 
 Tab:AddToggle({
-	Name = "ComprehendFirw",
+	Name = "ComprehendFire",
 	Default = false,
 	Callback = function(Value)
 	  _G.autoPill = Value
@@ -116,11 +123,20 @@ Tab:AddToggle({
 })
 
 Tab:AddToggle({
-	Name = "Auto Pill 2",
+	Name = "ComprehendWater",
 	Default = false,
 	Callback = function(Value)
 	  _G.autoPillTw = Value
           autoPillTw()
+	end    
+})
+
+Tab:AddToggle({
+	Name = "ComprehendEarth",
+	Default = false,
+	Callback = function(Value)
+	  _G.Earth = Value
+          Earth()
 	end    
 })
 
