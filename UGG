@@ -1,0 +1,43 @@
+local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/thanhdat4461/OrionMoblie/main/source')))()
+local Window = OrionLib:MakeWindow({Name = "Untitled Gym Game", HidePremium = false, SaveConfig = true, ConfigFolder = "OrionTest"})
+
+--Values
+
+
+--Functions
+function autoGym()
+ while _G.autoGym == true do 
+   local args = {
+    [1] = "Air"
+}
+
+game:GetService("ReplicatedStorage").Remotes.Exercise:FireServer()
+   wait(.000000000000000000000000001)
+  end
+ end
+
+--Tabs
+local Tab = Window:MakeTab({
+	Name = "Main",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})
+
+--Buttons
+
+
+
+--Toggles
+Tab:AddToggle({
+	Name = "Gym",
+	Default = false,
+	Callback = function(Value)
+	  _G.autoGym = Value
+          autoGym()
+	end    
+})
+
+
+
+
+OrionLib:Init()
