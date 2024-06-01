@@ -1,85 +1,165 @@
-local Mana = loadstring(game:HttpGet("https://pastebin.com/raw/inP2PXxe"))()
+local cam = workspace.CurrentCamera
+local UIS = game:GetService("UserInputService")
+local RS = game:GetService("RunService")
+local onMobile = not UIS.KeyboardEnabled
+local keysDown = {}
+local rotating = false
+local scriptEnabled = true
 
-local Win = Mana:Window("Anime Fighting Simulator Z") -- Creates the Window AKA Adds the ScreenGui to CoreGui lol
+if not game:IsLoaded() then game.Loaded:Wait() end
 
-local MainStuff = Mana:SName("MainStuff") -- Creates a little information mark in the top left looks cool ngl try it
+cam.CameraType = Enum.CameraType.Scriptable
 
-local Autofarm = Win:Tab("AutoFarm")-- This Creates a Tab on the left
+local speed = 5
+local sens = .3
 
-Autofarm:Toggle("Speed", false, function(t) -- This is A Toggle
-speed = t
-   while speed do task.wait()
--- Script made by Yes King
+speed /= 10
+if onMobile then sens*=2 end
 
-local args = {
-    [1] = "TrainStat",
-    [2] = "Speed"
-}
+-- Create ScreenGui
+local screenGui = Instance.new("ScreenGui")
+screenGui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
 
-game:GetService("ReplicatedStorage").Events:FindFirstChild("Stats/RemoteFunction"):InvokeServer(unpack(args))
-end      
-end)
+-- Create Frame
+local frame = Instance.new("Frame")
+frame.Size = UDim2.new(0.3, 0, 0.1, 0)
+frame.Position = UDim2.new(0.35, 0, 0.85, 0)
+frame.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+frame.BackgroundTransparency = 0.5
+frame.Parent = screenGui
 
-Autofarm:Toggle("Durability", false, function(d)
-Dura = d
-while Dura do
-wait()
+-- Create Minimize Button
+local minimizeButton = Instance.new("TextButton")
+minimizeButton.Size = UDim2.new(0.2, 0, 1, 0)
+minimizeButton.Position = UDim2.new(0.8, 0, 0, 0)
+minimizeButton.BackgroundColor3 = Color3.fromRGB(255, 0, 0)
+minimizeButton.Text = "-"
+minimizeButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+minimizeButton.TextScaled = true
+minimizeButton.Parent = frame
 
-local args = {
-    [1] = "TrainStat",
-    [2] = "Durability"
-}
+-- Create On/Off Button
+local onOffButton = Instance.new("TextButton")
+onOffButton.Size = UDim2.new(0.2, 0, 1, 0)
+onOffButton.Position = UDim2.new(0.6, 0, 0, 0)
+onOffButton.BackgroundColor3 = Color3.fromRGB(0, 255, 0)
+onOffButton.Text = "On"
+onOffButton.TextColor3 = Color3.fromRGB(0, 0, 0)
+onOffButton.TextScaled = true
+onOffButton.Parent = frame
 
-game:GetService("ReplicatedStorage").Events:FindFirstChild("Stats/RemoteFunction"):InvokeServer(unpack(args))
+-- Function to minimize or maximize the GUI
+local function toggleMinimize()
+    if minimizeButton.Text == "-" then
+        frame.Size = UDim2.new(0.1, 0, 0.05, 0)
+        minimizeButton.Text = "+"
+    else
+        frame.Size = UDim2.new(0.3, 0, 0.1, 0)
+        minimizeButton.Text = "-"
+    end
 end
-end)
 
-Autofarm:Toggle("Strength", false, function(St)
-Strength = St
-while Strength do
-wait()
-
-local args = {
-    [1] = "TrainStat",
-    [2] = "Strength"
-}
-
-game:GetService("ReplicatedStorage").Events:FindFirstChild("Stats/RemoteFunction"):InvokeServer(unpack(args))
+-- Function to toggle the script on and off
+local function toggleScript()
+    scriptEnabled = not scriptEnabled
+    onOffButton.Text = scriptEnabled and "On" or "Off"
 end
-end)
 
-Autofarm:Toggle("Chakra", false, function(ch)
-Cha = ch
-while Cha do
-wait()
+-- Connect Minimize Button Click Event
+minimizeButton.MouseButton1Click:Connect(toggleMinimize)
 
-local args = {
-    [1] = "TrainStat",
-    [2] = "Chakra"
-}
+-- Connect On/Off Button Click Event
+onOffButton.MouseButton1Click:Connect(toggleScript)
 
-game:GetService("ReplicatedStorage").Events:FindFirstChild("Stats/RemoteFunction"):InvokeServer(unpack(args))
+-- Function to handle rendering and camera movement
+local function renderStepped()
+    if not scriptEnabled then
+        return
+    end
+
+    if rotating then
+        local delta = UIS:GetMouseDelta()
+        local cf = cam.CFrame
+        local yAngle = cf:ToEulerAngles(Enum.RotationOrder.YZX)
+        local newAmount = math.deg(yAngle)+delta.Y
+        if newAmount > 65 or newAmount < -65 then
+            if not (yAngle<0 and delta.Y<0) and not (yAngle>0 and delta.Y>0) then
+                delta = Vector2.new(delta.X,0)
+            end 
+        end
+        cf *= CFrame.Angles(-math.rad(delta.Y),0,0)
+        cf = CFrame.Angles(0,-math.rad(delta.X),0) * (cf - cf.Position) + cf.Position
+        cf = CFrame.lookAt(cf.Position, cf.Position + cf.LookVector)
+        if delta ~= Vector2.new(0,0) then cam.CFrame = cam.CFrame:Lerp(cf,sens) end
+        UIS.MouseBehavior = Enum.MouseBehavior.LockCurrentPosition
+    else
+        UIS.MouseBehavior = Enum.MouseBehavior.Default
+    end
+
+    if keysDown["Enum.KeyCode.W"] then
+        cam.CFrame *= CFrame.new(Vector3.new(0,0,-speed))
+    end
+    if keysDown["Enum.KeyCode.A"] then
+        cam.CFrame *= CFrame.new(Vector3.new(-speed,0,0))
+    end
+    if keysDown["Enum.KeyCode.S"] then
+        cam.CFrame *= CFrame.new(Vector3.new(0,0,speed))
+    end
+    if keysDown["Enum.KeyCode.D"] then
+        cam.CFrame *= CFrame.new(Vector3.new(speed,0,0))
+    end
 end
+
+-- Connect renderStepped function to RenderStepped event
+RS.RenderStepped:Connect(renderStepped)
+
+local validKeys = {"Enum.KeyCode.W","Enum.KeyCode.A","Enum.KeyCode.S","Enum.KeyCode.D"}
+
+-- Function to handle InputBegan event
+UIS.InputBegan:Connect(function(Input)
+    for i, key in pairs(validKeys) do
+        if key == tostring(Input.KeyCode) then
+            keysDown[key] = true
+        end
+    end
+    if Input.UserInputType == Enum.UserInputType.MouseButton2 or (Input.UserInputType == Enum.UserInputType.Touch and UIS:GetMouseLocation().X>(cam.ViewportSize.X/2)) then
+        rotating = true
+    end
 end)
 
-Autofarm:Toggle("Sword", false, function(Sw)
-Swor = Sw
-while Swor do
-wait()
-
-local args = {
-    [1] = "TrainStat",
-    [2] = "Sword"
-}
-
-game:GetService("ReplicatedStorage").Events:FindFirstChild("Stats/RemoteFunction"):InvokeServer(unpack(args))
-end
+-- Function to handle InputEnded event
+UIS.InputEnded:Connect(function(Input)
+    for key, v in pairs(keysDown) do
+        if key == tostring(Input.KeyCode) then
+            keysDown[key] = false
+        end
+    end
+    if Input.UserInputType == Enum.UserInputType.MouseButton2 or (Input.UserInputType == Enum.UserInputType.Touch and UIS:GetMouseLocation().X>(cam.ViewportSize.X/2)) then
+        rotating = false
+    end
 end)
 
-
-Autofarm:Label("Made By Yes King") -- This is just for information or Text ;
-
-Autofarm:line() -- This Creates a line aka some space for a new section or something like that :
-
-
-print("Enjoy!")
+-- Function to handle TouchMoved event
+UIS.TouchMoved:Connect(function(input)
+    if touchPos then
+        if input.Position.X < cam.ViewportSize.X/2 then
+            if input.Position.Y < touchPos.Y then
+                keysDown["Enum.KeyCode.W"] = true
+                keysDown["Enum.KeyCode.S"] = false
+            else
+                keysDown["Enum.KeyCode.W"] = false
+                keysDown["Enum.KeyCode.S"] = true
+            end
+            if input.Position.X < (touchPos.X-15) then
+                keysDown["Enum.KeyCode.A"] = true
+                keysDown["Enum.KeyCode.D"] = false
+            elseif input.Position.X > (touchPos.X+15) then
+                keysDown["Enum.KeyCode.A"] = false
+                keysDown["Enum.KeyCode.D"] = true
+            else
+                keysDown["Enum.KeyCode.A"] = false
+                keysDown["Enum.KeyCode.D"] = false
+            end
+        end
+       end
+end)
