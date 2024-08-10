@@ -11,7 +11,7 @@ function TempValue()
         }
 
         game:GetService("ReplicatedStorage").Remotes.Drop:FireServer(unpack(args))
-        wait(0.01) -- Adjusted to a reasonable wait time
+        wait(0.01) 
     end
 end
 
@@ -25,11 +25,11 @@ local Tab = Window:MakeTab({
 -- Adaptive Input
 Tab:AddTextbox({
     Name = "Drops",
-    Default = "1", -- Default should be a string if it's input in the text box
+    Default = "1", 
     TextDisappear = true,
     Callback = function(Value)
-        _G.NumTempValue = tonumber(Value) -- Convert the string input to a number
-        _G.TempValue = true -- This line starts the TempValue function, assuming you want it to start immediately
+        _G.NumTempValue = tonumber(Value)
+        _G.TempValue = true 
         TempValue()
     end	  
 })
