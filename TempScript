@@ -1,0 +1,37 @@
+local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/thanhdat4461/OrionMoblie/main/source')))()
+
+-- Window
+local Window = OrionLib:MakeWindow({Name = "HeyHeyHey!!", HidePremium = false, SaveConfig = true, ConfigFolder = "OrionTest"})
+
+-- Values
+function TempValue()
+    while _G.TempValue == true do 
+        local args = {
+            [1] = _G.NumTempValue
+        }
+
+        game:GetService("ReplicatedStorage").Remotes.Drop:FireServer(unpack(args))
+        wait(0.01) -- Adjusted to a reasonable wait time
+    end
+end
+
+-- Tabs
+local Tab = Window:MakeTab({
+    Name = "Main",
+    Icon = "rbxassetid://4483345998",
+    PremiumOnly = false
+})
+
+-- Adaptive Input
+Tab:AddTextbox({
+    Name = "Drops",
+    Default = "1", -- Default should be a string if it's input in the text box
+    TextDisappear = true,
+    Callback = function(Value)
+        _G.NumTempValue = tonumber(Value) -- Convert the string input to a number
+        _G.TempValue = true -- This line starts the TempValue function, assuming you want it to start immediately
+        TempValue()
+    end	  
+})
+
+OrionLib:Init()
